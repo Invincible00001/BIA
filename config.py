@@ -1,7 +1,9 @@
-MONDAY_API_KEY = "monday.com api key here"
+import os
 
-DEALS_BOARD_ID = "your Deals board ID"
+DEALS_BOARD_ID = os.getenv("DEALS_BOARD_ID")
 
-WORK_ORDERS_BOARD_ID = "your work order board ID"
+WORK_ORDERS_BOARD_ID = os.getenv("WORK_ORDERS_BOARD_ID")
 
-OPENAI_API_KEY = "Add your OpenAI api key here"
+MONDAY_API_KEY = os.getenv("MONDAY_API_KEY")
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
