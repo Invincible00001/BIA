@@ -1,3 +1,8 @@
+streamlit
+pandas
+requests
+openai
+python-dotenv
 Business Intelligence Agent
 
 This AI agent answers founder-level business questions by querying monday.com boards.
