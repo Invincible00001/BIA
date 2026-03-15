@@ -3,7 +3,15 @@ import pandas as pd
 
 def clean_board_data(raw):
 
-    items = raw["data"]["boards"][0]["items_page"]["items"]
+    if "data" not in raw:
+        raise Exception(f"Monday API error: {raw}")
+
+    boards = raw["data"].get("boards", [])
+
+    if not boards:
+        raise Exception("No boards returned from Monday API")
+
+    items = boards[0]["items_page"]["items"]
 
     rows = []
 
@@ -18,25 +26,8 @@ def clean_board_data(raw):
 
     df = pd.DataFrame(rows)
 
-    df.fillna("Unknown", inplace=True)
+    df.columns = df.columns.str.strip()
+
+    df.fillna("", inplace=True)
 
     return df
-
-
-def normalize_sector(sector):
-
-    if not sector:
-        return "Unknown"
-
-    sector = sector.lower()
-
-    if "energy" in sector:
-        return "Energy"
-
-    if "mining" in sector:
-        return "Mining"
-
-    if "infra" in sector:
-        return "Infrastructure"
-
-    return sector.title()
