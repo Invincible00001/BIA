@@ -1,10 +1,12 @@
 import requests
-from config import MONDAY_API_KEY
+import os
+
+API_KEY = os.getenv("MONDAY_API_KEY")
 
 API_URL = "https://api.monday.com/v2"
 
 headers = {
-    "Authorization": MONDAY_API_KEY,
+    "Authorization": API_KEY,
     "Content-Type": "application/json"
 }
 
@@ -35,4 +37,9 @@ def fetch_board_items(board_id):
         headers=headers
     )
 
-    return response.json()
+    data = response.json()
+
+    # Debug logging (very useful in Render logs)
+    print("MONDAY API RESPONSE:", data)
+
+    return data
